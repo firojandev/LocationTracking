@@ -14,10 +14,13 @@ class ItemContainer extends StatefulWidget {
 class _ItemContainerState extends State<ItemContainer> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: widget.itemsList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ItemRow(itemModel: widget.itemsList[index]);
-        });
+    return Container(
+      margin: const EdgeInsets.fromLTRB(10.0,10,10,0),
+      child: ListView.builder(
+          itemCount: widget.itemsList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ItemRow(itemModel: widget.itemsList[index]);
+          }),
+    );
   }
 }

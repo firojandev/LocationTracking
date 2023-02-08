@@ -23,23 +23,26 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextButton(
-              onPressed: () async {
-                _getCurrentPosition();
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: 300,
-                  height: 60,
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.lightBlue,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: const Text(
-                      'Button',
-                      style: TextStyle(color: Colors.white, fontSize: 16.0),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0,50,0,0),
+              child: TextButton(
+                onPressed: () async {
+                  _getCurrentPosition();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                  //  width: 350,
+                    height: 80,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.lightGreen,
+                      // padding:
+                      //     const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      child: const Text(
+                        'Track Now',
+                        style: TextStyle(color: Colors.white, fontSize: 16.0),
+                      ),
                     ),
                   ),
                 ),
@@ -114,8 +117,11 @@ class _HomePageState extends State<HomePage> {
     await placemarkFromCoordinates(position.latitude, position.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
+      // String address =
+      //     '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
       String address =
-          '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+          '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}';
+
       ItemModel itemModel = new ItemModel(
           position.latitude, position.latitude, address, DateTime.now());
       logObjectBox.saveItem(itemModel);

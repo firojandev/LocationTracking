@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:log_my_location/common/app_constants.dart';
 import 'package:log_my_location/modules/history/history_page.dart';
 import 'package:log_my_location/modules/home/home_page.dart';
 
@@ -27,7 +28,7 @@ class _MyBottomNavbarState extends State<MyBottomNavbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Demo"),
+        title: Text(AppConstants.app_name),
         backgroundColor: Colors.green,
       ),
       body: Center(
