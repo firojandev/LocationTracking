@@ -37,8 +37,6 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       alignment: Alignment.center,
                       color: Colors.lightGreen,
-                      // padding:
-                      //     const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       child: const Text(
                         'Track Now',
                         style: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -125,6 +123,9 @@ class _HomePageState extends State<HomePage> {
       ItemModel itemModel = new ItemModel(
           position.latitude, position.latitude, address, DateTime.now());
       logObjectBox.saveItem(itemModel);
+      setState(() {
+
+      });
     }).catchError((e) {
       debugPrint(e);
     });
