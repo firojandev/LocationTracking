@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:log_my_location/common/app_constants.dart';
+import 'package:log_my_location/common/localdb/LogObjectBox.dart';
 
 import 'modules/my_bottom_navbar.dart';
 
-void main() {
+late LogObjectBox logObjectBox;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  logObjectBox = await LogObjectBox.create();
   runApp(const MyApp());
 }
 
@@ -13,7 +19,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: AppConstants.app_name,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
