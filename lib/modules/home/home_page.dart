@@ -35,8 +35,13 @@ class _HomePageState extends State<HomePage> {
                   //  width: 350,
                     height: 80,
                     child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.lightBlue,
+                        borderRadius: BorderRadius.circular(
+                          25.0,
+                        ),
+                      ),
                       alignment: Alignment.center,
-                      color: Colors.lightGreen,
                       child: const Text(
                         'Track Now',
                         style: TextStyle(color: Colors.white, fontSize: 16.0),

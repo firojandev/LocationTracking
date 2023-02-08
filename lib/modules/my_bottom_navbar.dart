@@ -15,7 +15,7 @@ class _MyBottomNavbarState extends State<MyBottomNavbar> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    HistoryPage(),
+    HistoryPage(initialIndex: 0,),
   ];
 
   void _onItemTapped(int index) {
