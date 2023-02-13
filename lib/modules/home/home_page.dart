@@ -125,8 +125,10 @@ class _HomePageState extends State<HomePage> {
       String address =
           '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}';
 
+      DateTime dt = DateTime.now();
+
       ItemModel itemModel = new ItemModel(
-          position.latitude, position.latitude, address, DateTime.now());
+          position.latitude, position.latitude, address, dt,dt.day,dt.month,dt.year);
       logObjectBox.saveItem(itemModel);
       setState(() {
 

@@ -20,35 +20,50 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 5100361755899701873),
+      id: const IdUid(1, 3223311253137169130),
       name: 'ItemModel',
-      lastPropertyId: const IdUid(5, 1737134456051454259),
+      lastPropertyId: const IdUid(8, 4264116881393486096),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 4024640307289354307),
+            id: const IdUid(1, 6086245463370339532),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 3201626211204898680),
+            id: const IdUid(2, 3642227700133911104),
             name: 'lat',
             type: 8,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 6257569658240770878),
+            id: const IdUid(3, 345126399136929566),
             name: 'lng',
             type: 8,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 3037369062315407584),
+            id: const IdUid(4, 5380658425659184301),
             name: 'address',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 1737134456051454259),
+            id: const IdUid(5, 7762468697679509465),
             name: 'createdDateTime',
-            type: 10,
+            type: 12,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 5572696331916315072),
+            name: 'day',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4198546520888460883),
+            name: 'month',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 4264116881393486096),
+            name: 'year',
+            type: 6,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -75,7 +90,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 5100361755899701873),
+      lastEntityId: const IdUid(1, 3223311253137169130),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -99,12 +114,19 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (ItemModel object, fb.Builder fbb) {
           final addressOffset =
               object.address == null ? null : fbb.writeString(object.address!);
-          fbb.startTable(6);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.lat);
           fbb.addFloat64(2, object.lng);
           fbb.addOffset(3, addressOffset);
-          fbb.addInt64(4, object.createdDateTime?.millisecondsSinceEpoch);
+          fbb.addInt64(
+              4,
+              object.createdDateTime == null
+                  ? null
+                  : object.createdDateTime!.microsecondsSinceEpoch * 1000);
+          fbb.addInt64(5, object.day);
+          fbb.addInt64(6, object.month);
+          fbb.addInt64(7, object.year);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -120,7 +142,11 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 10),
               createdDateTimeValue == null
                   ? null
-                  : DateTime.fromMillisecondsSinceEpoch(createdDateTimeValue))
+                  : DateTime.fromMicrosecondsSinceEpoch(
+                      (createdDateTimeValue / 1000).round()),
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0),
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0),
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -148,4 +174,16 @@ class ItemModel_ {
   /// see [ItemModel.createdDateTime]
   static final createdDateTime =
       QueryIntegerProperty<ItemModel>(_entities[0].properties[4]);
+
+  /// see [ItemModel.day]
+  static final day =
+      QueryIntegerProperty<ItemModel>(_entities[0].properties[5]);
+
+  /// see [ItemModel.month]
+  static final month =
+      QueryIntegerProperty<ItemModel>(_entities[0].properties[6]);
+
+  /// see [ItemModel.year]
+  static final year =
+      QueryIntegerProperty<ItemModel>(_entities[0].properties[7]);
 }

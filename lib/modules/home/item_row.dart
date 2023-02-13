@@ -19,8 +19,9 @@ class _ItemRowState extends State<ItemRow> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     DateTime dateTime = widget.itemModel.createdDateTime!;
+    print(dateTime);
     String fDateTime = DateFormat.yMMMMEEEEd().format(dateTime);
-    String formattedTime = DateFormat.jm().format(dateTime);
+    String formattedTime = DateFormat.jms().format(dateTime);
     return Card(
         margin: EdgeInsets.all(1.0),
         child: InkWell(

@@ -4,41 +4,56 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:5100361755899701873",
-      "lastPropertyId": "5:1737134456051454259",
+      "id": "1:3223311253137169130",
+      "lastPropertyId": "8:4264116881393486096",
       "name": "ItemModel",
       "properties": [
         {
-          "id": "1:4024640307289354307",
+          "id": "1:6086245463370339532",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:3201626211204898680",
+          "id": "2:3642227700133911104",
           "name": "lat",
           "type": 8
         },
         {
-          "id": "3:6257569658240770878",
+          "id": "3:345126399136929566",
           "name": "lng",
           "type": 8
         },
         {
-          "id": "4:3037369062315407584",
+          "id": "4:5380658425659184301",
           "name": "address",
           "type": 9
         },
         {
-          "id": "5:1737134456051454259",
+          "id": "5:7762468697679509465",
           "name": "createdDateTime",
-          "type": 10
+          "type": 12
+        },
+        {
+          "id": "6:5572696331916315072",
+          "name": "day",
+          "type": 6
+        },
+        {
+          "id": "7:4198546520888460883",
+          "name": "month",
+          "type": 6
+        },
+        {
+          "id": "8:4264116881393486096",
+          "name": "year",
+          "type": 6
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:5100361755899701873",
+  "lastEntityId": "1:3223311253137169130",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

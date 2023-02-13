@@ -4,3 +4,10 @@ export PATH="$PATH:/Volumes/Projects/altaf/flutterapps/sdk/flutter/bin"
 Run Command below when any model is updated
 -------------------------------------------
 flutter pub run build_runner build
+
+
+--android
+flutter build apk --release
+
+--iOS
+flutter build ios --release

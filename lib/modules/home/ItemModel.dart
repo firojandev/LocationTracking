@@ -10,8 +10,12 @@ class ItemModel {
 
   String? address;
 
-  @Property(type: PropertyType.date)
+  @Property(type: PropertyType.dateNano)
   DateTime? createdDateTime;
 
-  ItemModel(this.lat, this.lng, this.address, this.createdDateTime);
+  int day = 0;
+  int month = 0;
+  int year = 0;
+
+  ItemModel(this.lat, this.lng, this.address, this.createdDateTime,this.day,this.month,this.year);
 }

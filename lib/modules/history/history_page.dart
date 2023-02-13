@@ -15,15 +15,19 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> with SingleTickerProviderStateMixin {
-
+class _HistoryPageState extends State<HistoryPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this, initialIndex: widget.initialIndex);
+    _tabController = TabController(
+        length: 4,
+        vsync: this,
+        initialIndex: widget.initialIndex);
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -34,58 +38,79 @@ class _HistoryPageState extends State<HistoryPage> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(8,8,8,16),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(4),
+              margin: EdgeInsets.all(2),
               height: 45,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(
-                  25.0,
+                  15.0,
                 ),
               ),
               child: TabBar(
                 controller: _tabController,
+                isScrollable: true,
+               // padding: EdgeInsets.zero,
+              //  indicatorPadding: EdgeInsets.zero,
+               // labelPadding: EdgeInsets.zero,
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    25.0,
+                    15.0,
                   ),
                   color: Colors.lightBlue,
                 ),
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black,
-                tabs: [
-                  Tab(text: "All",),
-                  Tab(text: "Today",),
+                tabs: const [
+                  Tab(
+                    text: "All",
+                  ),
+                  Tab(
+                    text: "Today",
+                  ),
+                  Tab(
+                    text: "This Month",
+                  ),
+                  Tab(
+                    text: "Previous Month",
+                  ),
                 ],
               ),
             ),
             Expanded(
-              child: Padding(padding: EdgeInsets.only(top: 10),
+              child: Padding(
+                padding: EdgeInsets.only(top: 10),
                 child: TabBarView(
                   controller: _tabController,
                   children: [
                     Center(
-                      child: itemBuilder(),
+                      child: itemBuilder(AppConstants.itemsAll),
                     ),
                     Center(
-                      child: itemBuilder(),
+                      child: itemBuilder(AppConstants.itemsToday),
+                    ),
+                    Center(
+                      child: itemBuilder(AppConstants.itemsThisMonth),
+                    ),
+                    Center(
+                      child: itemBuilder(AppConstants.itemsPreviousMonth),
                     ),
                   ],
-                ),),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-
   }
 
-  FutureBuilder<List<ItemModel>> itemBuilder() {
+  FutureBuilder<List<ItemModel>> itemBuilder(String filterBy) {
     return FutureBuilder<List<ItemModel>>(
-      future: items(),
+      future: items(filterBy),
       builder: (BuildContext context, AsyncSnapshot<List<ItemModel>> snapshot) {
         if (snapshot.hasData) {
           return ItemContainer(itemsList: snapshot.data!);
@@ -95,10 +120,9 @@ class _HistoryPageState extends State<HistoryPage> with SingleTickerProviderStat
     );
   }
 
-  Future<List<ItemModel>> items() async {
+  Future<List<ItemModel>> items(String filterBy) async {
     List<ItemModel> savedItemsList =
-    logObjectBox.getItems(AppConstants.itemFeedAll);
+        logObjectBox.getFilteredItems(filterBy);
     return savedItemsList;
   }
-
 }
